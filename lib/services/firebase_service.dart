@@ -3,10 +3,47 @@ import 'package:firebase_database/firebase_database.dart';
 
 import '../models/trivia_room.dart';
 import '../models/hand_room.dart';
+import 'commentary_service.dart'; // AI + fallback commentary
 
-// FirebaseService handles ALL communication with the Firebase Realtime Database.
-// Every other part of the app (screens, widgets) talks to Firebase ONLY through
-// this class — keeping the rest of the code clean and simple.
+// ---------------------------------------------------------------------------
+// Deep-cast helper
+// ---------------------------------------------------------------------------
+// Firebase on Web returns LinkedMap<Object?, Object?> instead of
+// Map<String, dynamic> for every nested map in the snapshot.
+// Map<String, dynamic>.from() only does a SHALLOW cast, so nested
+// objects (players list, powerCards, etc.) still crash at runtime.
+//
+// _deepCast() walks the entire tree and converts every map and list
+// recursively so our fromJson() methods always receive clean types.
+// ---------------------------------------------------------------------------
+
+// Converts any value returned by Firebase into its clean Dart equivalent.
+dynamic _deepCastValue(dynamic value) {
+  if (value is Map) {
+    // Convert every key to String, recursively cast every value
+    return Map<String, dynamic>.fromEntries(
+      value.entries.map(
+        (e) => MapEntry(e.key.toString(), _deepCastValue(e.value)),
+      ),
+    );
+  } else if (value is List) {
+    // Recursively cast every list element
+    return value.map(_deepCastValue).toList();
+  }
+  // Primitives (int, double, bool, String, null) pass through unchanged
+  return value;
+}
+
+// Convenience wrapper that always returns a Map<String, dynamic>.
+Map<String, dynamic> _deepCast(dynamic raw) {
+  return _deepCastValue(raw) as Map<String, dynamic>;
+}
+
+// ---------------------------------------------------------------------------
+// FirebaseService
+// ---------------------------------------------------------------------------
+// Every other part of the app (screens, widgets) talks to Firebase ONLY
+// through this class — keeping the rest of the code clean and simple.
 //
 // Database structure:
 //   /trivia_rooms/{roomCode}/   ← IPL Trivia rooms
@@ -16,7 +53,38 @@ class FirebaseService {
   // The root reference to Firebase Realtime Database
   final DatabaseReference _db = FirebaseDatabase.instance.ref();
 
+  // Commentary generator (tries Groq AI, falls back to templates)
+  final _commentary = CommentaryService();
+
   // ── Helpers ───────────────────────────────────────────────────────────────
+
+  // Pushes one commentary line to Firebase and trims the list to the limit.
+  // [ref] is either a trivia or hand room reference.
+  Future<void> _pushCommentary(
+      DatabaseReference ref, String text, String mode) async {
+    await ref.runTransaction((current) {
+      if (current == null) return Transaction.success(current);
+      final room = _deepCast(current);
+
+      // Build the new line
+      final newLine = {
+        'text': text,
+        'mode': mode,
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      };
+
+      // Prepend to list and keep only the most recent [commentaryLimit] items
+      final existing = (room['commentary'] as List? ?? [])
+          .map((l) => _deepCast(l))
+          .toList();
+      final updated = [newLine, ...existing]
+          .take(CommentaryService.commentaryLimit)
+          .toList();
+
+      room['commentary'] = updated;
+      return Transaction.success(room);
+    });
+  }
 
   // Generates a random 4-character uppercase room code, e.g. "XK7P"
   String _generateRoomCode() {
@@ -171,7 +239,8 @@ class FirebaseService {
       if (!event.snapshot.exists) {
         throw Exception('Trivia room "$roomCode" no longer exists.');
       }
-      final data = Map<String, dynamic>.from(event.snapshot.value as Map);
+      // _deepCast fixes the web-only LinkedMap<Object?,Object?> issue
+      final data = _deepCast(event.snapshot.value);
       return TriviaRoom.fromJson(data);
     });
   }
@@ -305,7 +374,8 @@ class FirebaseService {
       if (!event.snapshot.exists) {
         throw Exception('Hand room "$roomCode" no longer exists.');
       }
-      final data = Map<String, dynamic>.from(event.snapshot.value as Map);
+      // _deepCast fixes the web-only LinkedMap<Object?,Object?> issue
+      final data = _deepCast(event.snapshot.value);
       return HandRoom.fromJson(data);
     });
   }
@@ -322,10 +392,265 @@ class FirebaseService {
     final ref = isTrivia ? _triviaRef(roomCode) : _handRef(roomCode);
     await ref.runTransaction((current) {
       if (current == null) return Transaction.success(current);
-      final room = Map<String, dynamic>.from(current as Map);
+      final room = _deepCast(current);
       final players = (room['players'] as List? ?? [])
-          .where((p) => (p as Map)['id'] != playerId)
+          .where((p) => (_deepCastValue(p) as Map)['id'] != playerId)
           .toList();
+      room['players'] = players;
+      return Transaction.success(room);
+    });
+  }
+
+  // ── IPL Trivia — Game flow ────────────────────────────────────────────────
+
+  // Host calls this to start the game.
+  // Writes the first question + sets status = 'answering'.
+  // [questions] is the list returned by TriviaService.pickQuestions().
+  Future<void> startTriviaGame({
+    required String roomCode,
+    required List<Map<String, dynamic>> questions, // Already serialised to JSON maps
+  }) async {
+    await _triviaRef(roomCode).update({
+      'status': 'answering',
+      'questionIndex': 0,
+      'timeLeft': 10,
+      'currentQuestion': questions[0], // Show the first question
+      // Store all questions under a separate node so the host can advance them
+      'questionBank': questions,
+    });
+  }
+
+  // Called when a player submits an answer.
+  // Updates their score and marks them as answered.
+  //
+  // [pointsEarned] is already calculated by TriviaService.calculateScore().
+  Future<void> submitTriviaAnswer({
+    required String roomCode,
+    required String playerId,
+    required int pointsEarned,
+  }) async {
+    await _triviaRef(roomCode).runTransaction((current) {
+      if (current == null) return Transaction.success(current);
+
+      final room = _deepCast(current);
+      final players = (room['players'] as List? ?? []).map((p) {
+        final player = _deepCast(p);
+        if (player['id'] == playerId) {
+          player['answered'] = true;
+          player['score'] = ((player['score'] as int?) ?? 0) + pointsEarned;
+        }
+        return player;
+      }).toList();
+
+      room['players'] = players;
+      return Transaction.success(room);
+    });
+  }
+
+  // Host calls this to reveal the correct answer and show the leaderboard.
+  // Sets status = 'revealing', builds the leaderboard, and pushes commentary.
+  Future<void> revealTriviaAnswer({required String roomCode}) async {
+    final snapshot = await _triviaRef(roomCode).get();
+    if (!snapshot.exists) return;
+
+    final room = _deepCast(snapshot.value);
+    final players = (room['players'] as List? ?? [])
+        .map((p) => _deepCast(p))
+        .toList();
+    final currentQuestion =
+        _deepCast(room['currentQuestion'] as Map? ?? {});
+    final correctIndex = (currentQuestion['correctIndex'] as int?) ?? 0;
+    final options = (currentQuestion['options'] as List? ?? []);
+    final correctAnswer =
+        correctIndex < options.length ? options[correctIndex].toString() : '?';
+
+    // Sort players by score descending
+    players.sort((a, b) =>
+        ((b['score'] as int?) ?? 0).compareTo((a['score'] as int?) ?? 0));
+
+    // Build leaderboard entries with rank numbers
+    final leaderboard = players.asMap().entries.map((entry) {
+      return {
+        'rank': entry.key + 1,
+        'name': entry.value['name'] as String,
+        'score': (entry.value['score'] as int?) ?? 0,
+      };
+    }).toList();
+
+    await _triviaRef(roomCode).update({
+      'status': 'revealing',
+      'leaderboard': leaderboard,
+    });
+
+    // ── Generate commentary for every player who answered ──────────────────
+    // Fire-and-forget: we don't await so the UI isn't blocked
+    _generateTriviaRevealCommentary(
+      ref: _triviaRef(roomCode),
+      players: players,
+      correctAnswer: correctAnswer,
+    );
+  }
+
+  // Generates and pushes commentary lines for each player answer result.
+  // Called after reveal; runs async in the background.
+  Future<void> _generateTriviaRevealCommentary({
+    required DatabaseReference ref,
+    required List<Map<String, dynamic>> players,
+    required String correctAnswer,
+  }) async {
+    // One line per player who answered
+    for (final player in players) {
+      final answered = player['answered'] as bool? ?? false;
+      if (!answered) continue;
+
+      final event = {
+        'type': 'trivia_answer',
+        'playerName': player['name'] ?? 'Player',
+        'isCorrect': (player['answered'] == true), // simplified
+        'scoreDelta': player['score'] ?? 0,
+        'correctAnswer': correctAnswer,
+      };
+      final line = await _commentary.generateLine(event);
+      await _pushCommentary(ref, line, 'trivia');
+    }
+
+    // Summary line (all answered / timeout)
+    final summaryEvent = {
+      'type': 'trivia_end',
+      'reason': 'all_answered',
+      'correctAnswer': correctAnswer,
+    };
+    final summaryLine = await _commentary.generateLine(summaryEvent);
+    await _pushCommentary(ref, summaryLine, 'trivia');
+  }
+
+  // Host calls this to move to the next question (or end the game).
+  Future<void> advanceTriviaQuestion({required String roomCode}) async {
+    final snapshot = await _triviaRef(roomCode).get();
+    if (!snapshot.exists) return;
+
+    final room = _deepCast(snapshot.value);
+    final currentIndex = (room['questionIndex'] as int?) ?? 0;
+    final totalQuestions = (room['totalQuestions'] as int?) ?? 10;
+    final questionBank = (room['questionBank'] as List? ?? []);
+
+    final nextIndex = currentIndex + 1;
+
+    if (nextIndex >= totalQuestions || nextIndex >= questionBank.length) {
+      // No more questions — game over
+      await _triviaRef(roomCode).update({'status': 'finished'});
+
+      // Game-end commentary — read leaderboard from the existing snapshot
+      final existingLeaderboard = (room['leaderboard'] as List? ?? [])
+          .map((e) => _deepCast(e))
+          .toList();
+      final winner =
+          existingLeaderboard.isNotEmpty ? existingLeaderboard.first : null;
+      if (winner != null) {
+        final event = {
+          'type': 'trivia_game_end',
+          'winnerName': winner['name'] ?? 'The champion',
+          'score': winner['score'] ?? 0,
+        };
+        final line = await _commentary.generateLine(event);
+        await _pushCommentary(_triviaRef(roomCode), line, 'trivia');
+      }
+    } else {
+      // Reset player answered flags and push the next question
+      final players = (room['players'] as List? ?? []).map((p) {
+        final player = _deepCast(p);
+        player['answered'] = false; // Reset for next question
+        return player;
+      }).toList();
+
+      await _triviaRef(roomCode).update({
+        'status': 'answering',
+        'questionIndex': nextIndex,
+        'timeLeft': 10,
+        'currentQuestion': questionBank[nextIndex],
+        'players': players,
+      });
+    }
+  }
+
+  // Decrements the shot clock by 1 second.
+  // The host's device runs this on a Timer.periodic(Duration(seconds: 1), ...).
+  Future<void> tickTriviaTimer({required String roomCode}) async {
+    await _triviaRef(roomCode).runTransaction((current) {
+      if (current == null) return Transaction.success(current);
+      final room = _deepCast(current);
+      final timeLeft = (room['timeLeft'] as int?) ?? 0;
+      room['timeLeft'] = (timeLeft - 1).clamp(0, 10);
+      return Transaction.success(room);
+    });
+  }
+
+  // ── Power card actions (Trivia) ───────────────────────────────────────────
+
+  // Activates the "Review" card for a player — hides one wrong option index.
+  Future<void> useReviewCard({
+    required String roomCode,
+    required String playerId,
+    required int hiddenOptionIndex, // The index to hide (chosen by server normally)
+  }) async {
+    await _triviaRef(roomCode).runTransaction((current) {
+      if (current == null) return Transaction.success(current);
+
+      final room = _deepCast(current);
+
+      // Mark the player's Review card as used
+      final players = (room['players'] as List? ?? []).map((p) {
+        final player = _deepCast(p);
+        if (player['id'] == playerId) {
+          final cards = (player['powerCards'] as List? ?? []).map((c) {
+            final card = _deepCast(c);
+            if (card['id'] == 'review') card['used'] = true;
+            return card;
+          }).toList();
+          player['powerCards'] = cards;
+        }
+        return player;
+      }).toList();
+
+      // Add the hidden option to the current question
+      final question = _deepCast(room['currentQuestion'] ?? {});
+      final hidden = List<int>.from(
+          (question['hiddenOptionIndexes'] as List? ?? []));
+      if (!hidden.contains(hiddenOptionIndex)) {
+        hidden.add(hiddenOptionIndex);
+      }
+      question['hiddenOptionIndexes'] = hidden;
+
+      room['players'] = players;
+      room['currentQuestion'] = question;
+      return Transaction.success(room);
+    });
+  }
+
+  // Activates the "Double Runs" card — marks it active for this player.
+  // The next call to submitTriviaAnswer should double their score.
+  Future<void> useDoubleRunsCard({
+    required String roomCode,
+    required String playerId,
+  }) async {
+    await _triviaRef(roomCode).runTransaction((current) {
+      if (current == null) return Transaction.success(current);
+      final room = _deepCast(current);
+      final players = (room['players'] as List? ?? []).map((p) {
+        final player = _deepCast(p);
+        if (player['id'] == playerId) {
+          final cards = (player['powerCards'] as List? ?? []).map((c) {
+            final card = _deepCast(c);
+            if (card['id'] == 'double_runs') {
+              card['used'] = true;
+              card['active'] = true; // Will be deactivated after next answer
+            }
+            return card;
+          }).toList();
+          player['powerCards'] = cards;
+        }
+        return player;
+      }).toList();
       room['players'] = players;
       return Transaction.success(room);
     });

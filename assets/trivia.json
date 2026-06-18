@@ -1,0 +1,562 @@
+[
+  {
+    "id": "seed-001",
+    "question": "Which team won the first IPL title in 2008?",
+    "options": ["Chennai Super Kings", "Rajasthan Royals", "Mumbai Indians", "Delhi Daredevils"],
+    "correctIndex": 1,
+    "explanation": "Rajasthan Royals beat Chennai Super Kings in the 2008 final.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-002",
+    "question": "Who captained Chennai Super Kings to their first IPL title?",
+    "options": ["Suresh Raina", "MS Dhoni", "Ravindra Jadeja", "Stephen Fleming"],
+    "correctIndex": 1,
+    "explanation": "MS Dhoni captained CSK to their first IPL title in 2010.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-003",
+    "question": "Which franchise is commonly known as RCB?",
+    "options": ["Rajasthan Cricket Brigade", "Royal Challengers Bengaluru", "Ranchi Cricket Bulls", "Rising Cricket Battalion"],
+    "correctIndex": 1,
+    "explanation": "RCB stands for Royal Challengers Bengaluru.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-004",
+    "question": "Which player is famously called 'Mr. IPL'?",
+    "options": ["Virat Kohli", "Suresh Raina", "Rohit Sharma", "AB de Villiers"],
+    "correctIndex": 1,
+    "explanation": "Suresh Raina earned the nickname for his consistent IPL performances.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-005",
+    "question": "Which team plays its home games at Eden Gardens?",
+    "options": ["Kolkata Knight Riders", "Punjab Kings", "Sunrisers Hyderabad", "Gujarat Titans"],
+    "correctIndex": 0,
+    "explanation": "Eden Gardens in Kolkata is KKR's iconic home ground.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-006",
+    "question": "Who has captained Mumbai Indians to multiple IPL titles?",
+    "options": ["Sachin Tendulkar", "Kieron Pollard", "Rohit Sharma", "Hardik Pandya"],
+    "correctIndex": 2,
+    "explanation": "Rohit Sharma led Mumbai Indians through their most successful title run.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-007",
+    "question": "What color jersey are Chennai Super Kings best known for?",
+    "options": ["Blue", "Yellow", "Purple", "Orange"],
+    "correctIndex": 1,
+    "explanation": "CSK are strongly associated with their yellow kit.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-008",
+    "question": "Which bowler is associated with the nickname 'Boom Boom' in IPL discussions?",
+    "options": ["Jasprit Bumrah", "Yuzvendra Chahal", "Bhuvneshwar Kumar", "Rashid Khan"],
+    "correctIndex": 0,
+    "explanation": "Jasprit Bumrah is often called Boom because of his surname and impact.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-009",
+    "question": "Which IPL team was introduced in 2022 and won the title in its debut season?",
+    "options": ["Lucknow Super Giants", "Gujarat Titans", "Rising Pune Supergiant", "Kochi Tuskers Kerala"],
+    "correctIndex": 1,
+    "explanation": "Gujarat Titans won IPL 2022 in their first season.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-010",
+    "question": "Which player is known for the phrase 'Ee Sala Cup Namde' being associated with his IPL fanbase?",
+    "options": ["Virat Kohli", "KL Rahul", "Sanju Samson", "Shreyas Iyer"],
+    "correctIndex": 0,
+    "explanation": "The chant is strongly associated with RCB supporters and Virat Kohli's long RCB tenure.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-011",
+    "question": "Which team won the IPL in 2016?",
+    "options": ["Royal Challengers Bengaluru", "Sunrisers Hyderabad", "Mumbai Indians", "Kolkata Knight Riders"],
+    "correctIndex": 1,
+    "explanation": "Sunrisers Hyderabad beat RCB in the 2016 final.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-012",
+    "question": "Which overseas batter is famous for spectacular 360-degree batting with RCB?",
+    "options": ["Chris Gayle", "AB de Villiers", "Faf du Plessis", "Glenn Maxwell"],
+    "correctIndex": 1,
+    "explanation": "AB de Villiers was called Mr. 360 for his all-around strokeplay.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-013",
+    "question": "Which team is associated with the Wankhede Stadium?",
+    "options": ["Mumbai Indians", "Delhi Capitals", "Rajasthan Royals", "Lucknow Super Giants"],
+    "correctIndex": 0,
+    "explanation": "Mumbai Indians play many home matches at Wankhede Stadium.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-014",
+    "question": "What does IPL stand for?",
+    "options": ["Indian Premier League", "International Premier League", "India Players League", "Indian Power League"],
+    "correctIndex": 0,
+    "explanation": "IPL stands for Indian Premier League.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-015",
+    "question": "Which franchise was earlier known as Delhi Daredevils?",
+    "options": ["Delhi Capitals", "Punjab Kings", "Gujarat Titans", "Lucknow Super Giants"],
+    "correctIndex": 0,
+    "explanation": "Delhi Daredevils rebranded as Delhi Capitals.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-016",
+    "question": "Which spinner has been a key wicket-taker for Rajasthan Royals and India in the IPL era?",
+    "options": ["Yuzvendra Chahal", "Ishant Sharma", "Umesh Yadav", "Mohit Sharma"],
+    "correctIndex": 0,
+    "explanation": "Yuzvendra Chahal has been one of the IPL's leading leg-spinners.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-017",
+    "question": "Which team uses a lion-themed identity and is heavily associated with MS Dhoni?",
+    "options": ["Chennai Super Kings", "Kolkata Knight Riders", "Punjab Kings", "Rajasthan Royals"],
+    "correctIndex": 0,
+    "explanation": "CSK's branding and fan culture often use lion imagery.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-018",
+    "question": "Which IPL franchise has purple and gold as signature colors?",
+    "options": ["Kolkata Knight Riders", "Sunrisers Hyderabad", "Mumbai Indians", "Royal Challengers Bengaluru"],
+    "correctIndex": 0,
+    "explanation": "KKR are known for their purple and gold kit.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-019",
+    "question": "Which explosive West Indian batter became an IPL icon with RCB and KKR?",
+    "options": ["Chris Gayle", "Dwayne Bravo", "Sunil Narine", "Andre Russell"],
+    "correctIndex": 0,
+    "explanation": "Chris Gayle had landmark IPL seasons, especially with RCB.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-020",
+    "question": "Which all-rounder is famous for the 'Champion' celebration and played many seasons for CSK?",
+    "options": ["Dwayne Bravo", "Andre Russell", "Kieron Pollard", "Jason Holder"],
+    "correctIndex": 0,
+    "explanation": "Dwayne Bravo was a key CSK all-rounder and popular entertainer.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-021",
+    "question": "Which IPL team did Hardik Pandya captain to the 2022 title?",
+    "options": ["Mumbai Indians", "Gujarat Titans", "Lucknow Super Giants", "Punjab Kings"],
+    "correctIndex": 1,
+    "explanation": "Hardik Pandya captained Gujarat Titans in their 2022 title-winning debut season.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-022",
+    "question": "Which team won back-to-back IPL titles in 2010 and 2011?",
+    "options": ["Chennai Super Kings", "Mumbai Indians", "Kolkata Knight Riders", "Deccan Chargers"],
+    "correctIndex": 0,
+    "explanation": "CSK won consecutive titles in 2010 and 2011.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-023",
+    "question": "Which Hyderabad-based team won the 2009 IPL?",
+    "options": ["Sunrisers Hyderabad", "Deccan Chargers", "Hyderabad Heroes", "Andhra Aces"],
+    "correctIndex": 1,
+    "explanation": "Deccan Chargers won the 2009 IPL.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-024",
+    "question": "Which team is abbreviated as PBKS?",
+    "options": ["Punjab Kings", "Pune Brave Kings", "Patna Batting Kings", "Premier Bengaluru Kings"],
+    "correctIndex": 0,
+    "explanation": "PBKS stands for Punjab Kings.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-025",
+    "question": "Which wicketkeeper-batter led Rajasthan Royals to the IPL 2022 final?",
+    "options": ["Rishabh Pant", "Sanju Samson", "KL Rahul", "Ishan Kishan"],
+    "correctIndex": 1,
+    "explanation": "Sanju Samson captained Rajasthan Royals in IPL 2022.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-026",
+    "question": "Which team is associated with the slogan 'Korbo Lorbo Jeetbo'?",
+    "options": ["Kolkata Knight Riders", "Mumbai Indians", "Chennai Super Kings", "Delhi Capitals"],
+    "correctIndex": 0,
+    "explanation": "The slogan belongs to Kolkata Knight Riders.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-027",
+    "question": "Which IPL team did KL Rahul captain before moving away ahead of the 2025 season?",
+    "options": ["Lucknow Super Giants", "Rajasthan Royals", "Sunrisers Hyderabad", "Kolkata Knight Riders"],
+    "correctIndex": 0,
+    "explanation": "KL Rahul captained Lucknow Super Giants after the franchise entered the IPL.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-028",
+    "question": "Which player is one of the most successful IPL captains and is known as 'Hitman'?",
+    "options": ["Rohit Sharma", "Shikhar Dhawan", "Ajinkya Rahane", "Gautam Gambhir"],
+    "correctIndex": 0,
+    "explanation": "Rohit Sharma is nicknamed Hitman and led Mumbai Indians to several titles.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-029",
+    "question": "Which mystery spinner became a long-time match-winner for KKR?",
+    "options": ["Sunil Narine", "Piyush Chawla", "Amit Mishra", "Rahul Chahar"],
+    "correctIndex": 0,
+    "explanation": "Sunil Narine became central to KKR's bowling attack.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-030",
+    "question": "Which role does an orange cap recognize in an IPL season?",
+    "options": ["Most runs", "Most wickets", "Best strike rate", "Best fielder"],
+    "correctIndex": 0,
+    "explanation": "The Orange Cap is awarded to the leading run-scorer.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-031",
+    "question": "Which role does a purple cap recognize in an IPL season?",
+    "options": ["Most wickets", "Most runs", "Most sixes", "Best economy rate"],
+    "correctIndex": 0,
+    "explanation": "The Purple Cap is awarded to the leading wicket-taker.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-032",
+    "question": "Which IPL franchise was renamed from Kings XI Punjab?",
+    "options": ["Punjab Kings", "Gujarat Titans", "Rajasthan Royals", "Delhi Capitals"],
+    "correctIndex": 0,
+    "explanation": "Kings XI Punjab rebranded as Punjab Kings.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-033",
+    "question": "Which city does the Gujarat Titans franchise represent?",
+    "options": ["Ahmedabad", "Surat", "Vadodara", "Rajkot"],
+    "correctIndex": 0,
+    "explanation": "Gujarat Titans are based in Ahmedabad.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-034",
+    "question": "Which venue is strongly associated with Royal Challengers Bengaluru home games?",
+    "options": ["M. Chinnaswamy Stadium", "Eden Gardens", "Wankhede Stadium", "Arun Jaitley Stadium"],
+    "correctIndex": 0,
+    "explanation": "RCB's home ground is M. Chinnaswamy Stadium.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-035",
+    "question": "Which IPL team is associated with Sawai Mansingh Stadium?",
+    "options": ["Rajasthan Royals", "Gujarat Titans", "Punjab Kings", "Delhi Capitals"],
+    "correctIndex": 0,
+    "explanation": "Rajasthan Royals play home matches at Sawai Mansingh Stadium in Jaipur.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-036",
+    "question": "Which batter scored the famous 175 not out in an IPL match?",
+    "options": ["Chris Gayle", "Virat Kohli", "Brendon McCullum", "David Warner"],
+    "correctIndex": 0,
+    "explanation": "Chris Gayle made 175 not out for RCB in 2013.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-037",
+    "question": "Who hit 158 not out in the very first IPL match in 2008?",
+    "options": ["Brendon McCullum", "Adam Gilchrist", "Matthew Hayden", "Sanath Jayasuriya"],
+    "correctIndex": 0,
+    "explanation": "Brendon McCullum's 158 not out for KKR launched the IPL in spectacular style.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-038",
+    "question": "Which IPL award is given to the season's highest run-scorer?",
+    "options": ["Orange Cap", "Purple Cap", "Fair Play Award", "MVP Medal"],
+    "correctIndex": 0,
+    "explanation": "The Orange Cap recognizes the leading run-scorer in an IPL season.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-039",
+    "question": "Which IPL award is given to the season's highest wicket-taker?",
+    "options": ["Purple Cap", "Orange Cap", "Emerging Player", "Fair Play Award"],
+    "correctIndex": 0,
+    "explanation": "The Purple Cap recognizes the leading wicket-taker.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-040",
+    "question": "Which team did Gautam Gambhir captain to IPL titles in 2012 and 2014?",
+    "options": ["Kolkata Knight Riders", "Delhi Capitals", "Mumbai Indians", "Punjab Kings"],
+    "correctIndex": 0,
+    "explanation": "Gautam Gambhir captained KKR to titles in 2012 and 2014.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-041",
+    "question": "Which IPL franchise is associated with the Arun Jaitley Stadium?",
+    "options": ["Delhi Capitals", "Rajasthan Royals", "Punjab Kings", "Sunrisers Hyderabad"],
+    "correctIndex": 0,
+    "explanation": "Delhi Capitals play many home matches at Arun Jaitley Stadium.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-042",
+    "question": "Which team won the IPL in 2023?",
+    "options": ["Chennai Super Kings", "Gujarat Titans", "Mumbai Indians", "Royal Challengers Bengaluru"],
+    "correctIndex": 0,
+    "explanation": "Chennai Super Kings beat Gujarat Titans in the 2023 final.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-043",
+    "question": "Which team won the IPL in 2024?",
+    "options": ["Kolkata Knight Riders", "Sunrisers Hyderabad", "Rajasthan Royals", "Royal Challengers Bengaluru"],
+    "correctIndex": 0,
+    "explanation": "Kolkata Knight Riders defeated Sunrisers Hyderabad in the 2024 final.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-044",
+    "question": "Which IPL franchise was added along with Gujarat Titans for the 2022 season?",
+    "options": ["Lucknow Super Giants", "Rising Pune Supergiant", "Kochi Tuskers Kerala", "Deccan Chargers"],
+    "correctIndex": 0,
+    "explanation": "Lucknow Super Giants and Gujarat Titans joined the IPL in 2022.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-045",
+    "question": "Which city is the Lucknow Super Giants franchise based in?",
+    "options": ["Lucknow", "Kanpur", "Indore", "Nagpur"],
+    "correctIndex": 0,
+    "explanation": "Lucknow Super Giants represent Lucknow.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-046",
+    "question": "Which former IPL team won the 2009 title?",
+    "options": ["Deccan Chargers", "Kochi Tuskers Kerala", "Pune Warriors India", "Gujarat Lions"],
+    "correctIndex": 0,
+    "explanation": "Deccan Chargers won IPL 2009.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-047",
+    "question": "Which team won the IPL in 2017?",
+    "options": ["Mumbai Indians", "Rising Pune Supergiant", "Kolkata Knight Riders", "Sunrisers Hyderabad"],
+    "correctIndex": 0,
+    "explanation": "Mumbai Indians won the 2017 final by one run against Rising Pune Supergiant.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-048",
+    "question": "Which team won the IPL in 2018 after returning from suspension?",
+    "options": ["Chennai Super Kings", "Sunrisers Hyderabad", "Kolkata Knight Riders", "Rajasthan Royals"],
+    "correctIndex": 0,
+    "explanation": "Chennai Super Kings won IPL 2018 after their return.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-049",
+    "question": "Which team won the IPL in 2019?",
+    "options": ["Mumbai Indians", "Chennai Super Kings", "Delhi Capitals", "Sunrisers Hyderabad"],
+    "correctIndex": 0,
+    "explanation": "Mumbai Indians beat Chennai Super Kings in the 2019 final.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-050",
+    "question": "Which team won the IPL in 2020?",
+    "options": ["Mumbai Indians", "Delhi Capitals", "Sunrisers Hyderabad", "Royal Challengers Bengaluru"],
+    "correctIndex": 0,
+    "explanation": "Mumbai Indians defeated Delhi Capitals to win IPL 2020.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-051",
+    "question": "Which team won the IPL in 2021?",
+    "options": ["Chennai Super Kings", "Kolkata Knight Riders", "Delhi Capitals", "Punjab Kings"],
+    "correctIndex": 0,
+    "explanation": "Chennai Super Kings beat Kolkata Knight Riders in the 2021 final.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-052",
+    "question": "Which team won the IPL in 2022?",
+    "options": ["Gujarat Titans", "Rajasthan Royals", "Lucknow Super Giants", "Royal Challengers Bengaluru"],
+    "correctIndex": 0,
+    "explanation": "Gujarat Titans won IPL 2022 in their debut season.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-053",
+    "question": "Which IPL franchise did David Warner captain to the 2016 title?",
+    "options": ["Sunrisers Hyderabad", "Delhi Capitals", "Rajasthan Royals", "Punjab Kings"],
+    "correctIndex": 0,
+    "explanation": "David Warner captained Sunrisers Hyderabad to the 2016 title.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-054",
+    "question": "Which West Indian all-rounder became a KKR icon for power hitting and pace bowling?",
+    "options": ["Andre Russell", "Dwayne Bravo", "Kieron Pollard", "Jason Holder"],
+    "correctIndex": 0,
+    "explanation": "Andre Russell became one of KKR's most explosive match-winners.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-055",
+    "question": "Which Mumbai Indians all-rounder was famous for finishing games and bowling medium pace?",
+    "options": ["Kieron Pollard", "Andre Russell", "Dwayne Bravo", "Carlos Brathwaite"],
+    "correctIndex": 0,
+    "explanation": "Kieron Pollard was a long-time Mumbai Indians finisher and all-rounder.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-056",
+    "question": "Which Indian batter is known for opening aggressively for Delhi and Sunrisers in the IPL?",
+    "options": ["Shikhar Dhawan", "Cheteshwar Pujara", "Ajinkya Rahane", "Murali Vijay"],
+    "correctIndex": 0,
+    "explanation": "Shikhar Dhawan has been a prolific IPL opener.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-057",
+    "question": "Which spinner is one of the IPL's leading wicket-takers and is known for leg-spin?",
+    "options": ["Yuzvendra Chahal", "Ravichandran Ashwin", "Harbhajan Singh", "Axar Patel"],
+    "correctIndex": 0,
+    "explanation": "Yuzvendra Chahal is among the IPL's most successful leg-spinners.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-058",
+    "question": "Which Afghanistan spinner became a major IPL star with Sunrisers Hyderabad and Gujarat Titans?",
+    "options": ["Rashid Khan", "Mujeeb Ur Rahman", "Noor Ahmad", "Mohammad Nabi"],
+    "correctIndex": 0,
+    "explanation": "Rashid Khan has been a high-impact IPL spinner.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-059",
+    "question": "Which IPL team is known for the chant 'Whistle Podu'?",
+    "options": ["Chennai Super Kings", "Mumbai Indians", "Kolkata Knight Riders", "Punjab Kings"],
+    "correctIndex": 0,
+    "explanation": "'Whistle Podu' is closely associated with CSK supporters.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-060",
+    "question": "Which franchise is often called MI?",
+    "options": ["Mumbai Indians", "Mysuru Icons", "Maharashtra Invincibles", "Madurai Indians"],
+    "correctIndex": 0,
+    "explanation": "MI is the common abbreviation for Mumbai Indians.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-061",
+    "question": "Which franchise is often called DC?",
+    "options": ["Delhi Capitals", "Deccan Chargers", "Durban Capitals", "Dharamsala Challengers"],
+    "correctIndex": 0,
+    "explanation": "DC is the common abbreviation for Delhi Capitals.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-062",
+    "question": "Which franchise is often called SRH?",
+    "options": ["Sunrisers Hyderabad", "Southern Royals Hyderabad", "Super Riders Hubli", "Sports Royals Haryana"],
+    "correctIndex": 0,
+    "explanation": "SRH stands for Sunrisers Hyderabad.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-063",
+    "question": "Which franchise is often called GT?",
+    "options": ["Gujarat Titans", "Goa Tigers", "Guwahati Thunder", "Golden Tridents"],
+    "correctIndex": 0,
+    "explanation": "GT stands for Gujarat Titans.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-064",
+    "question": "Which IPL franchise uses orange as a major team color?",
+    "options": ["Sunrisers Hyderabad", "Rajasthan Royals", "Mumbai Indians", "Kolkata Knight Riders"],
+    "correctIndex": 0,
+    "explanation": "Sunrisers Hyderabad are strongly associated with orange.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-065",
+    "question": "Which IPL franchise uses pink as a major team color?",
+    "options": ["Rajasthan Royals", "Chennai Super Kings", "Lucknow Super Giants", "Kolkata Knight Riders"],
+    "correctIndex": 0,
+    "explanation": "Rajasthan Royals are known for their pink kit.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-066",
+    "question": "Which batter has long been associated with Royal Challengers Bengaluru and the number 18 jersey?",
+    "options": ["Virat Kohli", "AB de Villiers", "Faf du Plessis", "Chris Gayle"],
+    "correctIndex": 0,
+    "explanation": "Virat Kohli is closely associated with RCB and jersey number 18.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-067",
+    "question": "Which Chennai Super Kings player is famous for jersey number 7?",
+    "options": ["MS Dhoni", "Suresh Raina", "Ravindra Jadeja", "Deepak Chahar"],
+    "correctIndex": 0,
+    "explanation": "MS Dhoni is famously associated with number 7.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-068",
+    "question": "Which role does a finisher usually perform in T20 cricket?",
+    "options": ["Scores quickly near the end", "Opens the bowling", "Keeps wickets only", "Umpires the match"],
+    "correctIndex": 0,
+    "explanation": "A finisher is expected to score quickly and close out an innings.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-069",
+    "question": "In T20 cricket, how many legal balls are there in one over?",
+    "options": ["6", "5", "8", "10"],
+    "correctIndex": 0,
+    "explanation": "One over contains six legal deliveries.",
+    "source": "seed"
+  },
+  {
+    "id": "seed-070",
+    "question": "What is a Super Over used for in T20 cricket?",
+    "options": ["Breaking a tied match", "Replacing the toss", "Awarding bonus points", "Choosing the umpires"],
+    "correctIndex": 0,
+    "explanation": "A Super Over is a tie-breaker used when a match is tied.",
+    "source": "seed"
+  }
+]

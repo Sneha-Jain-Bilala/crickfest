@@ -39,13 +39,25 @@ class CommentaryFeed extends StatelessWidget {
               style: CrickifyTextStyles.bodyMuted.copyWith(fontSize: 13),
             )
           else
-            // Show each line as a paragraph
+            // Show each line with a bullet/icon based on the mode
             ...lines.map(
               (line) => Padding(
                 padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  line.text,
-                  style: CrickifyTextStyles.bodyMuted.copyWith(fontSize: 13),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      line.mode == 'trivia' ? '🎙️' : '🏏',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        line.text,
+                        style: CrickifyTextStyles.bodyMuted.copyWith(fontSize: 13),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
