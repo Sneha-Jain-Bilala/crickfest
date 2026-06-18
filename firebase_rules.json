@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "trivia_rooms": {
+      "$roomCode": {
+        
+        ".read": true,
+        
+        ".write": true
+      }
+    },
+    "hand_rooms": {
+      "$roomCode": {
+        ".read": true,
+        ".write": true
+      }
+    }
+  }
+}

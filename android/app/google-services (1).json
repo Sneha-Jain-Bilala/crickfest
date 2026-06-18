@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "309575459878",
+    "firebase_url": "https://crickfest-310a9-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "crickfest-310a9",
+    "storage_bucket": "crickfest-310a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309575459878:android:ce896b14997143620772e7",
+        "android_client_info": {
+          "package_name": "com.example.crickfest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhLAwSWu1qFFAXqgZomYyMI-doFVgWQwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
